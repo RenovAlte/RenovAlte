@@ -11,25 +11,26 @@ import LandingPage from "./pages/Landing/Landing";
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  if (!isAuthenticated) {
-    return <LandingPage onLogin={() => setIsAuthenticated(true)} />;
-  }
   return (
     <Router>
-      <div className="flex bg-gray-50">
-        <Sidebar />
-        <div className="flex-1 flex flex-col">
-          <TopBar />
-          <main className="flex-1 p-8">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/contractors" element={<Contractors />} />
-              <Route path="/financing" element={<Financing />} />
-              <Route path="/planning" element={<Planning />} />
-            </Routes>
-          </main>
+      {!isAuthenticated ? (
+        <LandingPage onLogin={() => setIsAuthenticated(true)} />
+      ) : (
+        <div className="flex bg-gray-50">
+          <Sidebar />
+          <div className="flex-1 flex flex-col">
+            <TopBar />
+            <main className="flex-1 p-8">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contractors" element={<Contractors />} />
+                <Route path="/financing" element={<Financing />} />
+                <Route path="/planning" element={<Planning />} />
+              </Routes>
+            </main>
+          </div>
         </div>
-      </div>
+      )}
     </Router>
   );
 };
