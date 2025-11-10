@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { projectApi, Project, PROJECT_TYPES } from "../../services/projects";
 import Heading from "../../components/Heading/Heading";
 import Text from "../../components/Text/Text";
@@ -27,24 +27,6 @@ const Home: React.FC = () => {
 		budget: null,
 		additional_information: "",
 	});
-	const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-
-	const currencyFormatter = useMemo(
-		() =>
-			new Intl.NumberFormat("de-DE", {
-				style: "currency",
-				currency: "EUR",
-			}),
-		[]
-	);
-
-	const formatBudget = useCallback(
-		(budget: number | null): string => {
-			if (budget === null) return "Not specified";
-			return currencyFormatter.format(budget);
-		},
-		[currencyFormatter]
-	);
 
 	useEffect(() => {
 		loadProjects();
@@ -63,30 +45,6 @@ const Home: React.FC = () => {
 		}
 	};
 
-	const validateForm = (): boolean => {
-		const errors: Record<string, string> = {};
-		if (!formData.name.trim()) {
-			errors.name = "Project Name is required";
-		}
-		if (!formData.address?.trim()) {
-			errors.address = "Address is required";
-		}
-		if (!formData.city?.trim()) {
-			errors.city = "City is required";
-		}
-		if (!formData.state?.trim()) {
-			errors.state = "State is required";
-		}
-		if (formData.budget === null) {
-			errors.budget = "Budget is required";
-		}
-		if (formData.budget !== null && formData.budget < 0) {
-			errors.budget = "Budget must be a positive number";
-		}
-		setFormErrors(errors);
-		return Object.keys(errors).length === 0;
-	};
-
 	const handleOpenCreateModal = () => {
 		setSelectedProject(null);
 		setFormData({
@@ -99,7 +57,6 @@ const Home: React.FC = () => {
 			budget: null,
 			additional_information: "",
 		});
-		setFormErrors({});
 		setIsModalOpen(true);
 	};
 
@@ -119,14 +76,12 @@ const Home: React.FC = () => {
 			budget: project.budget,
 			additional_information: project.additional_information,
 		});
-		setFormErrors({});
 		setIsModalOpen(true);
 	};
 
 	const handleCloseModal = () => {
 		setIsModalOpen(false);
 		setSelectedProject(null);
-		setFormErrors({});
 		setError(null);
 	};
 
@@ -139,8 +94,6 @@ const Home: React.FC = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!validateForm()) return;
-
 		try {
 			setError(null);
 			if (selectedProject?.id) {
@@ -267,7 +220,6 @@ const Home: React.FC = () => {
 											onEdit={handleOpenEditModal}
 											onDelete={handleDeleteClick}
 											getProjectTypeLabel={getProjectTypeLabel}
-											formatBudget={formatBudget}
 										/>
 									))}
 								</tbody>
@@ -285,7 +237,6 @@ const Home: React.FC = () => {
 									onEdit={handleOpenEditModal}
 									onDelete={handleDeleteClick}
 									getProjectTypeLabel={getProjectTypeLabel}
-									formatBudget={formatBudget}
 								/>
 							))}
 						</div>
@@ -297,7 +248,6 @@ const Home: React.FC = () => {
 				isOpen={isModalOpen}
 				selectedProject={selectedProject}
 				formData={formData}
-				formErrors={formErrors}
 				error={error}
 				onClose={handleCloseModal}
 				onSubmit={handleSubmit}

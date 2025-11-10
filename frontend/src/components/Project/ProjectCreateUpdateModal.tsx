@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import Heading from "../Heading/Heading";
@@ -9,7 +9,6 @@ interface ProjectCreateUpdateModalProps {
 	isOpen: boolean;
 	selectedProject: Project | null;
 	formData: Omit<Project, "id">;
-	formErrors: Record<string, string>;
 	error: string | null;
 	onClose: () => void;
 	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -21,13 +20,68 @@ const ProjectCreateUpdateModal: React.FC<ProjectCreateUpdateModalProps> = ({
 	isOpen,
 	selectedProject,
 	formData,
-	formErrors,
 	error,
 	onClose,
 	onSubmit,
 	onFormDataChange,
 	projectTypes,
 }) => {
+	const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+	const validationRules = useMemo(
+		() => [
+			{ key: "name" as const, message: "Project Name is required" },
+			{ key: "address" as const, message: "Address is required" },
+			{ key: "city" as const, message: "City is required" },
+			{ key: "state" as const, message: "State is required" },
+		],
+		[]
+	);
+
+	const validateForm = useCallback(
+		(data: Omit<Project, "id">) => {
+			const errors: Record<string, string> = {};
+
+			validationRules.forEach(({ key, message }) => {
+				const value = data[key];
+				if (typeof value !== "number" && !value?.trim()) {
+					errors[key] = message;
+				}
+			});
+
+			if (data.budget === null) {
+				errors.budget = "Budget is required";
+			} else if (data.budget < 0) {
+				errors.budget = "Budget must be a positive number";
+			}
+
+			return errors;
+		},
+		[validationRules]
+	);
+
+	const handleSubmit = useCallback(
+		(event: React.FormEvent<HTMLFormElement>) => {
+			event.preventDefault();
+			const errors = validateForm(formData);
+
+			if (Object.keys(errors).length > 0) {
+				setFormErrors(errors);
+				return;
+			}
+
+			setFormErrors({});
+			onSubmit(event);
+		},
+		[formData, onSubmit, validateForm]
+	);
+
+	useEffect(() => {
+		if (!isOpen) {
+			setFormErrors({});
+		}
+	}, [isOpen]);
+
 	const handleChange =
 		useCallback(
 			<Key extends keyof Omit<Project, "id">>(key: Key) =>
@@ -51,7 +105,7 @@ const ProjectCreateUpdateModal: React.FC<ProjectCreateUpdateModalProps> = ({
 						<X className="w-5 h-5 sm:w-6 sm:h-6" />
 					</button>
 				</div>
-				<form onSubmit={onSubmit} className="p-4 sm:p-6">
+				<form onSubmit={handleSubmit} className="p-4 sm:p-6">
 					{error && (
 						<div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
 							{error}
@@ -61,7 +115,7 @@ const ProjectCreateUpdateModal: React.FC<ProjectCreateUpdateModalProps> = ({
 						<div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
 							<p className="font-medium mb-2">Please fix the following errors:</p>
 							<ul className="list-disc list-inside space-y-1">
-								{Object.values(formErrors).map((err, index) => (
+								{(Object.values(formErrors) as string[]).map((err, index) => (
 									<li key={index} className="text-sm">
 										{err}
 									</li>

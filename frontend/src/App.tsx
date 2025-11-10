@@ -7,7 +7,7 @@ import { TopBar } from "./components/Topbar/Topbar";
 import { Footer } from "./components/Footer/Footer";
 import Contracting from "./pages/Contracting/Contracting";
 import Financing from "./pages/Financing/Financing";
-import LoginPage from "./pages/Landing/Landing";
+import LoginPage from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import { ProjectProvider, useProject } from "./contexts/ProjectContext";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";

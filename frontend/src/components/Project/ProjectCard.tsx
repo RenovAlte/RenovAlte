@@ -1,6 +1,7 @@
 import React from "react";
 import { Edit, Trash2, CheckCircle2 } from "lucide-react";
 import { Project } from "../../services/projects";
+import { formatBudget } from "../../utils/formatting";
 
 interface ProjectCardProps {
 	project: Project;
@@ -9,7 +10,6 @@ interface ProjectCardProps {
 	onEdit: (project: Project) => void;
 	onDelete: (project: Project) => void;
 	getProjectTypeLabel: (projectType: string) => string;
-	formatBudget: (budget: number | null) => string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -19,7 +19,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 	onEdit,
 	onDelete,
 	getProjectTypeLabel,
-	formatBudget,
 }) => {
 	return (
 		<div

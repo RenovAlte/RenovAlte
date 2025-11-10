@@ -1,6 +1,7 @@
 import React from "react";
 import { Edit, Trash2, CheckCircle2 } from "lucide-react";
 import { Project } from "../../services/projects";
+import { formatBudget } from "../../utils/formatting";
 
 interface ProjectRowProps {
 	project: Project;
@@ -9,7 +10,6 @@ interface ProjectRowProps {
 	onEdit: (project: Project) => void;
 	onDelete: (project: Project) => void;
 	getProjectTypeLabel: (projectType: string) => string;
-	formatBudget: (budget: number | null) => string;
 }
 
 const ProjectRow: React.FC<ProjectRowProps> = ({
@@ -19,7 +19,6 @@ const ProjectRow: React.FC<ProjectRowProps> = ({
 	onEdit,
 	onDelete,
 	getProjectTypeLabel,
-	formatBudget,
 }) => {
 	return (
 		<tr className={`hover:bg-gray-50 ${isSelected ? "bg-emerald-50 border-l-4 border-emerald-500" : ""}`}>

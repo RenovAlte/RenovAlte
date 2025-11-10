@@ -37,6 +37,8 @@ class Project(models.Model):
 	additional_information = models.TextField(
 		"Additional Information",
 		help_text="Additional information about the project",
+		null=True,
+		blank=True,
 	)
 
 	def __str__(self) -> str:
