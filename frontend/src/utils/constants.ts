@@ -77,3 +77,26 @@ export const NEIGHBOR_IMPACTS_OPTIONS = [
   { value: "scaffolding", label: "Scaffolding over neighbor property" },
   { value: "noise-windows", label: "Noise time windows" },
 ];
+
+export const FINANCING_PREFERENCE_OPTIONS = [
+  { value: "personal-savings", label: "Personal savings" },
+  { value: "bank-loan", label: "Bank loan" },
+  { value: "kfw-loan", label: "KfW loan" },
+  { value: "combination", label: "Combination" },
+];
+
+export const INCENTIVE_INTENT_OPTIONS = [
+  { value: "yes", label: "Yes, planning to apply" },
+  { value: "maybe", label: "Maybe/Undecided" },
+  { value: "no", label: "No, not interested" },
+];
+
+export const HERITAGE_PROTECTION = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+];
+
+export const LIVING_DURING_RENOVATION_OPTIONS = [
+  { value: "yes", label: "Will you live in the property during work?" },
+  { value: "no", label: "No" },
+];
