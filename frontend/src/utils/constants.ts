@@ -100,3 +100,30 @@ export const LIVING_DURING_RENOVATION_OPTIONS = [
   { value: "yes", label: "Will you live in the property during work?" },
   { value: "no", label: "No" },
 ];
+
+export const ENERGY_CERTIFICATE_RATING_OPTIONS = [
+  { value: "a_plus", label: "A+" },
+  { value: "a", label: "A" },
+  { value: "b", label: "B" },
+  { value: "c", label: "C" },
+  { value: "d", label: "D" },
+  { value: "e", label: "E" },
+  { value: "f", label: "F" },
+  { value: "g", label: "G" },
+  { value: "h", label: "H" },
+  { value: "unknown", label: "Unknown" },
+];
+
+export const KNOWN_MAJOR_ISSUES_OPTIONS = [
+  { value: "structural", label: "Structural problems" },
+  { value: "moisture-mold", label: "Moisture/mold" },
+  { value: "roof-damage", label: "Roof damage" },
+  { value: "electrical-plumbing", label: "Electrical/plumbing issues (specify)" },
+];
+
+export const SURVEYS_REQUIRED_OPTIONS = [
+  { value: "energy-consultant", label: "Energy consultant report" },
+  { value: "structural-engineer", label: "Structural engineer statement" },
+  { value: "fire-protection", label: "Fire protection concept" },
+  { value: "noise-thermal", label: "Noise/thermal calculations (EnEV/GEG)" },
+];

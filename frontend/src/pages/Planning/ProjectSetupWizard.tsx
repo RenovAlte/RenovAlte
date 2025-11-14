@@ -24,6 +24,9 @@ import {
   INCENTIVE_INTENT_OPTIONS,
   HERITAGE_PROTECTION,
   LIVING_DURING_RENOVATION_OPTIONS,
+  ENERGY_CERTIFICATE_RATING_OPTIONS,
+  KNOWN_MAJOR_ISSUES_OPTIONS,
+  SURVEYS_REQUIRED_OPTIONS,
 } from "../../utils/constants";
 
 type InputMode = "manual" | "prompt";
@@ -47,6 +50,10 @@ export function ProjectSetupWizard() {
   const [incentiveIntent, setIncentiveIntent] = useState("yes");
   const [heritageProtection, setHeritageProtection] = useState("no");
   const [livingDuringRenovation, setLivingDuringRenovation] = useState("no");
+  const [knownMajorIssues, setKnownMajorIssues] = useState("");
+  const [surveysRequired, setSurveysRequired] = useState("");
+  const [energyCertificateRating, setEnergyCertificateRating] =
+    useState("a_plus");
   const [financingPreference, setFinancingPreference] =
     useState("personal-savings");
   const [selectedGoals, setSelectedGoals] = useState<string[]>([
@@ -73,6 +80,12 @@ export function ProjectSetupWizard() {
         insulationType,
         windowsType,
         neighborImpact,
+        financingPreference,
+        incentiveIntent,
+        livingDuringRenovation,
+        energyCertificateRating,
+        knownMajorIssues,
+        surveysRequired,
       };
       console.log("Manual form data:", formData);
       // Send manual formData to API
@@ -266,13 +279,43 @@ export function ProjectSetupWizard() {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="Neighbor impacts">Neighbor impacts</Label>
+                <Label htmlFor="energy-certificate-rating">
+                  Energy Certificate Available
+                </Label>
+                <Select
+                  value={energyCertificateRating}
+                  options={ENERGY_CERTIFICATE_RATING_OPTIONS}
+                  onChange={setEnergyCertificateRating}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="known-major-issues">Known Major Issues</Label>
+                <Select
+                  value={knownMajorIssues}
+                  options={KNOWN_MAJOR_ISSUES_OPTIONS}
+                  onChange={setKnownMajorIssues}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="surveys-required">Surveys Require</Label>
+                <Select
+                  value={surveysRequired}
+                  options={SURVEYS_REQUIRED_OPTIONS}
+                  onChange={setSurveysRequired}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="Neighbor impacts">Neighbor Impacts</Label>
                 <Select
                   value={neighborImpact}
                   options={NEIGHBOR_IMPACTS_OPTIONS}
                   onChange={setNeighborImpact}
                 />
               </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
               {selectedGoals.includes("Heating System") && (
                 <div className="space-y-2">
                   <Label htmlFor="heating-system">Heating System Type</Label>
