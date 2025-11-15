@@ -51,7 +51,7 @@ export function ProjectSetupWizard({ onGeneratePlan, isGenerating }: ProjectSetu
   const [heatingSystem, setHeatingSystem] = useState("electric");
   const [insulationType, setInsulationType] = useState("partial");
   const [windowsType, setWindowsType] = useState("single-pane");
-  const [neighborImpact, setNeighborImpact] = useState("scaffolding");
+  const [neighborImpact, setNeighborImpact] = useState("no");
   const [incentiveIntent, setIncentiveIntent] = useState("yes");
   const [heritageProtection, setHeritageProtection] = useState("no");
   const [livingDuringRenovation, setLivingDuringRenovation] = useState("no");
