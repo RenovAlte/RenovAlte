@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 // Gemini AI Service for AI-powered financing assistance
 
 interface ChatMessage {
+=======
+// Gemini AI Service for AI-powered financing assistance (using Gemini, named openaiService for compatibility)
+
+export interface ChatMessage {
+>>>>>>> dev
   role: 'system' | 'user' | 'assistant';
   content: string;
 }
@@ -235,6 +241,7 @@ Keep it SHORT and SIMPLE - just document names with German terms in parentheses.
     }
   }
 
+<<<<<<< HEAD
   async getPersonalizedAdvice(formData: any): Promise<string> {
     const prompt = `A homeowner in Germany needs personalized advice for their renovation project:
 - Renovation type: ${formData.renovationType}
@@ -535,3 +542,12 @@ EXACT format:
 
 export const openAIService = new GeminiService();
 export type { ChatMessage };
+=======
+  isConfigured(): boolean {
+    return this.apiKey.length > 0;
+  }
+}
+
+export const openAIService = new GeminiService();
+export type { ChatMessage as OpenAIChatMessage };
+>>>>>>> dev
