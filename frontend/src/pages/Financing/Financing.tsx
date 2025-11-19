@@ -1,27 +1,18 @@
 import Heading from "../../components/Heading/Heading";
-<<<<<<< HEAD
-import React, { useState } from "react";
-import Text from "../../components/Text/Text";
-import { Home, Euro, TrendingUp, CheckCircle2, ExternalLink, AlertCircle, Loader2, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
-=======
 import React, { useState, useEffect } from "react";
 import Text from "../../components/Text/Text";
 import { Home, Euro, TrendingUp, CheckCircle2, ExternalLink, AlertCircle, Loader2, Sparkles, ChevronLeft, ChevronRight, Info, X } from "lucide-react";
->>>>>>> dev
 import FinancingAssistant from "../../components/FinancingAssistant/FinancingAssistant";
 import DocumentChecklist from "../../components/DocumentChecklist/DocumentChecklist";
 import CostCalculator from "../../components/CostCalculator/CostCalculator";
 import FinancingRecommendations from "../../components/FinancingRecommendations/FinancingRecommendations";
 
-<<<<<<< HEAD
-=======
 // Import ProjectContext to access selected project
 import { useProject } from "../../contexts/ProjectContext";
 
 // Import project to financing mapper
 import { mapProjectToFinancingForm, hasMinimumProjectData, getAutoFillMessage } from "../../utils/projectToFinancingMapper";
 
->>>>>>> dev
 // Import types from centralized file
 import {
   FormData,
@@ -87,24 +78,18 @@ import {
 import { geminiService } from '../../services/gemini.service';
 
 const Financing: React.FC = () => {
-<<<<<<< HEAD
-=======
   // Get selected project from context
   const { selectedProject } = useProject();
 
->>>>>>> dev
   const [mainStep, setMainStep] = useState<'form' | 'results'>('form');
   const [currentFormStep, setCurrentFormStep] = useState<number>(1); // Multi-step form: 1-6
   const [formData, setFormData] = useState<FormData>(DEFAULT_FORM_DATA);
   const [matchedOptions, setMatchedOptions] = useState<FinancingOption[]>([]);
 
-<<<<<<< HEAD
-=======
   // Auto-fill notification state
   const [autoFillMessage, setAutoFillMessage] = useState<string | null>(null);
   const [showAutoFillBanner, setShowAutoFillBanner] = useState(false);
 
->>>>>>> dev
   // RAG Analysis State
   const [ragAnalysis, setRagAnalysis] = useState<RAGAnalysisResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -123,8 +108,6 @@ const Financing: React.FC = () => {
 
   const totalSteps = formSteps.length;
 
-<<<<<<< HEAD
-=======
   // Auto-fill form from selected project on component mount
   useEffect(() => {
     if (hasMinimumProjectData(selectedProject)) {
@@ -148,7 +131,6 @@ const Financing: React.FC = () => {
     }
   }, [selectedProject]);
 
->>>>>>> dev
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -236,8 +218,6 @@ const Financing: React.FC = () => {
       {mainStep === 'form' ? (
         /* Multi-Step Questionnaire Form */
         <div className="bg-white rounded-lg shadow-md p-8">
-<<<<<<< HEAD
-=======
           {/* Auto-fill notification banner */}
           {showAutoFillBanner && autoFillMessage && selectedProject && (
             <div className="mb-6 bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-sm animate-slideDown">
@@ -269,7 +249,6 @@ const Financing: React.FC = () => {
             </div>
           )}
 
->>>>>>> dev
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">

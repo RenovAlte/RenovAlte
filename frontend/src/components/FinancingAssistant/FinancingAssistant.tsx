@@ -104,11 +104,7 @@ const FinancingAssistant: React.FC = () => {
             <div>
               <h4 className="font-semibold text-amber-900 text-sm mb-1">AI Assistant Not Configured</h4>
               <p className="text-xs text-amber-800">
-<<<<<<< HEAD
-                Add your OpenAI API key to enable the AI financing assistant.
-=======
                 Add your Gemini API key to enable the AI financing assistant.
->>>>>>> dev
               </p>
             </div>
           </div>
