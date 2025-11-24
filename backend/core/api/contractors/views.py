@@ -1,3 +1,4 @@
+"""
 from rest_framework import generics, permissions
 from django.db.models import Q
 from core.models import Contractor
@@ -9,7 +10,7 @@ class ContractorListView(generics.ListAPIView):
 	permission_classes = [permissions.IsAuthenticated]
 
 	def get_queryset(self):
-		"""Filter contractors by project_type and location"""
+		#Filter contractors by project_type and location
 		queryset = Contractor.objects.all()
 
 		# Filter by project_type (required)
@@ -61,3 +62,16 @@ class ContractorListView(generics.ListAPIView):
 		# Order by rating (descending), then by name
 		return queryset.order_by("-rating", "name")
 
+"""
+from rest_framework import generics, permissions
+from core.models import Contractor
+from .serializers import ContractorSerializer
+
+
+class ContractorListView(generics.ListAPIView):
+    serializer_class = ContractorSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        """Return ALL contractors for any project (development mode)."""
+        return Contractor.objects.all().order_by("-rating", "name")

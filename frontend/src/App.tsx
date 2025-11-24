@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Planning from "./pages/Planning/Planning";
@@ -13,7 +13,13 @@ import { ProjectProvider, useProject } from "./contexts/ProjectContext";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import LandingPage from "./pages/Landing/Landing";
+import axios from "axios";
 
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+axios.get("http://127.0.0.1:8000/api/get-csrf-token/");
 const Layout: React.FC = () => {
   const { selectedProject } = useProject();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -87,11 +93,18 @@ const AppRoutes: React.FC = () => {
 };
 
 const App: React.FC = () => {
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/get-csrf-token/")
+      .then(() => console.log("CSRF loaded"))
+      .catch((err) => console.log("CSRF error", err));
+  }, []);
+
   return (
     <AuthProvider>
       <AppRoutes />
     </AuthProvider>
   );
 };
-
 export default App;

@@ -4,7 +4,9 @@
 # --------------------------------------------------------------------------------------------------------------
 
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,4 +130,11 @@ REST_FRAMEWORK = {
 	],
 }
 
-
+# EMAIL SETTINGS (SMTP) — needed to send invitation emails to contractors
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
