@@ -10,6 +10,9 @@ import { PROJECT_TYPES } from "../../services/projects";
 import { ArrowLeft, Star, MapPin, CheckCircle2, Loader2, X, Users, Mail, Send, User, Sparkles, ChevronDown } from "lucide-react";
 import Stepper, { StepperStep } from "../../components/Stepper/Stepper";
 import AIAssistant from "../../components/AIAssistant/AIAssistant";
+import { useAuth } from "../../contexts/AuthContext";  
+import axios from "axios";
+
 
 const STEPS: StepperStep[] = [
 	{ id: 1, label: "Matching" },
@@ -21,8 +24,10 @@ const STEPS: StepperStep[] = [
 ];
 
 const Contracting: React.FC = () => {
+	const { user } = useAuth();
 	const { selectedProject } = useProject();
 	const navigate = useNavigate();
+	//const [activeStep, setActiveStep] = useState(1);
 	const [activeStep, setActiveStep] = useState(1);
 	const [contractors, setContractors] = useState<Contractor[]>([]);
 	const [selectedContractors, setSelectedContractors] = useState<Set<number>>(new Set());
@@ -128,7 +133,7 @@ Best regards`;
 			//   subject: emailSubject,
 			//   body: emailBody
 			// });
-
+		
 			setEmailSent(true);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Failed to send email");
@@ -136,6 +141,9 @@ Best regards`;
 			setSendingEmail(false);
 		}
 	};
+
+
+
 
 	const toggleContractorSelection = (contractorId: number) => {
 		setSelectedContractors((prev) => {

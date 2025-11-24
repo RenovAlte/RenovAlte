@@ -64,6 +64,9 @@ npm install
 # Start the development server
 npm run dev
 ```
+npm install axios
+npm install --save-dev @types/axios
+npm install axios@0.27.2 
 #### Development URLs
 - App: `http://127.0.0.1:3000/`
 

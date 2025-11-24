@@ -36,6 +36,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "axios": "^0.27.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -82,6 +83,7 @@
     ]
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "@types/react-router-dom": "^5.3.3",
     "tailwindcss": "^3.4.18"
   }
